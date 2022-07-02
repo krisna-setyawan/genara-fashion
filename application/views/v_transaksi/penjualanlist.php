@@ -16,15 +16,6 @@
                     <input type="hidden" id="grand_total" name="grand_total">
                     <input type="hidden" id="grand_laba" name="grand_laba">
 
-                    <!-- MENAMPILKAN PERINGATAN -->
-                    <?php if ($penjualan['hg_reseller'] != '0') {
-                        echo '
-                            <p class="ml-2"><b> Peringatan ! </b> ini adalah <b> Transaksi Penjualan Reseller </b> harga satuan barang 
-                            disesuaikan dengan harga reseller dan kelas reseller. <b>(' . $penjualan['nama_pembeli'] . ' 
-                            </b>  kelas reseller <b>' . $penjualan['kelas_reseller'] . ') </b></p>
-                        ';
-                    } ?>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="input-group input-group-lg mb-2 mr-sm-2">

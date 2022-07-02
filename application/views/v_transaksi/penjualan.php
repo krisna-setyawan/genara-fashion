@@ -64,70 +64,36 @@
                         <div class="col-sm-9">
                             <select class="custom-select form-control" id="jenis_penjualan" name="jenis_penjualan" required>
                                 <option value="" selected>-- Jenis Penjualan --</option>
-                                <option value="Umum">Umum</option>
-                                <option value="Pelanggan">Pelanggan</option>
-                                <option value="Reseller">Reseller</option>
+                                <option value="Tokopedia">Tokopedia</option>
+                                <option value="Shopee">Shopee</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="COD">COD</option>
                             </select>
                             <div class="invalid-feedback">Jenis Penjualan harus diisi.</div>
                         </div>
                     </div>
 
-                    <div class="form-group row mb-3" hidden id="div_id_pelanggan">
-                        <label class="col-sm-3 col-form-label">Pilih Pelanggan</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select form-control" id="id_pelanggan" name="id_pelanggan" required>
-                                <option value="" selected>-- Pilih Pelanggan --</option>
-                                <?php foreach ($pelanggan as $sp) : ?>
-                                    <option value="<?= $sp->id ?>"><?= $sp->nama ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <div class="invalid-feedback">Pelanggan harus diisi.</div>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-3" hidden id="div_id_reseller">
-                        <label class="col-sm-3 col-form-label">Pilih Reseller</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select form-control" id="id_reseller" name="id_reseller" required>
-                                <option value="" selected>-- Pilih Reseller --</option>
-                                <?php foreach ($reseller as $sp) : ?>
-                                    <option value="<?= $sp->id ?>"><?= $sp->nama ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <div class="invalid-feedback">Reseller harus diisi.</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-3" hidden id="div_nama_pembeli">
+                    <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">Nama Pembeli</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="nama_pembeli" name="nama_pembeli" required>
                             <div class="invalid-feedback">Nama Pembeli harus diisi.</div>
                         </div>
                     </div>
-                    <div class="form-group row mb-3" hidden id="div_alamat_pembeli">
+                    <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">Alamat Pembeli</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="alamat_pembeli" name="alamat_pembeli" required>
                             <div class="invalid-feedback">Alamat Pembeli harus diisi.</div>
                         </div>
                     </div>
-                    <div class="form-group row mb-3" hidden id="div_no_telp_pembeli">
+                    <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">No Telp Pembeli</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="no_telp_pembeli" name="no_telp_pembeli" required>
                             <div class="invalid-feedback">No Telp Pembeli harus diisi.</div>
                         </div>
                     </div>
-
-                    <!-- KELAS RESELLER -->
-                    <div class="form-group row mb-3" hidden id="div_kelas_reseller">
-                        <label class="col-sm-3 col-form-label">Kelas Reseller</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-lg" id="kelas_reseller" name="kelas_reseller" readonly required>
-                            <div class="invalid-feedback">Kelas Reseller harus diisi.</div>
-                        </div>
-                    </div>
-
 
                     <div class="form-group row mb-3">
                         <label class="col-sm-3 col-form-label">Tanggal Penjualan</label>
@@ -298,138 +264,23 @@
     // ADD DATA PENJUALAN -------------------------------------------------------------------------- ADD DATA PENJUALAN
     function batal_tambah() {
         $('#jenis_penjualan').val("");
-        $('#id_pelanggan').val("");
-        $('#id_reseller').val("");
         $('#nama_pembeli').val("");
         $('#alamat_pembeli').val("");
         $('#no_telp_pembeli').val("");
-        $('#kelas_reseller').val('0');
         $('#tanggal').val("");
         $('#form_tambah').removeClass('was-validated')
-        // ---------------------------------------------
-        $('#div_id_pelanggan').attr('hidden', true);
-        $('#div_id_reseller').attr('hidden', true);
-        $('#div_nama_pembeli').attr('hidden', true);
-        $('#div_alamat_pembeli').attr('hidden', true);
-        $('#div_no_telp_pembeli').attr('hidden', true);
     }
-
-    $("#jenis_penjualan").change(function() {
-        let jenis_penjualan = $(this).val();
-        if (jenis_penjualan == '') {
-            $('#div_id_pelanggan').attr('hidden', true);
-            $('#div_id_reseller').attr('hidden', true);
-            $('#div_nama_pembeli').attr('hidden', true);
-            $('#div_alamat_pembeli').attr('hidden', true);
-            $('#div_no_telp_pembeli').attr('hidden', true);
-            $('#div_kelas_reseller').attr('hidden', true);
-            // ---------------------------------------------
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-            $('#kelas_reseller').val('0');
-        } else if (jenis_penjualan == 'Umum') {
-            $('#div_id_pelanggan').attr('hidden', true);
-            $('#div_id_reseller').attr('hidden', true);
-            $('#div_nama_pembeli').attr('hidden', false);
-            $('#div_alamat_pembeli').attr('hidden', false);
-            $('#div_no_telp_pembeli').attr('hidden', false);
-            $('#div_kelas_reseller').attr('hidden', true);
-            // ---------------------------------------------
-            $('#id_pelanggan').attr('required', false);
-            $('#id_reseller').attr('required', false);
-            // ---------------------------------------------
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-            $('#kelas_reseller').val('0');
-        } else if (jenis_penjualan == 'Pelanggan') {
-            $('#div_id_pelanggan').attr('hidden', false);
-            $('#div_id_reseller').attr('hidden', true);
-            $('#div_nama_pembeli').attr('hidden', false);
-            $('#div_alamat_pembeli').attr('hidden', false);
-            $('#div_no_telp_pembeli').attr('hidden', false);
-            $('#div_kelas_reseller').attr('hidden', true);
-            // ---------------------------------------------
-            $('#id_pelanggan').attr('required', true);
-            $('#id_reseller').attr('required', false);
-            // ---------------------------------------------
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-            $('#kelas_reseller').val('0');
-        } else if (jenis_penjualan == 'Reseller') {
-            $('#div_id_pelanggan').attr('hidden', true);
-            $('#div_id_reseller').attr('hidden', false);
-            $('#div_nama_pembeli').attr('hidden', false);
-            $('#div_alamat_pembeli').attr('hidden', false);
-            $('#div_no_telp_pembeli').attr('hidden', false);
-            $('#div_kelas_reseller').attr('hidden', false);
-            // ---------------------------------------------
-            $('#id_pelanggan').attr('required', false);
-            $('#id_reseller').attr('required', true);
-            // ---------------------------------------------
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-            $('#kelas_reseller').val('');
-        }
-    })
-
-    $("#id_pelanggan").change(function() {
-        let id_pelanggan = $(this).val();
-        if (id_pelanggan != '') {
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url() ?>penjualan/get_pelanggan",
-                data: '&id_pelanggan=' + id_pelanggan,
-                dataType: 'JSON',
-                success: function(response) {
-                    $('#nama_pembeli').val(response.nama);
-                    $('#alamat_pembeli').val(response.alamat);
-                    $('#no_telp_pembeli').val(response.no_telp);
-                }
-            })
-        } else {
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-        }
-    })
-
-    $("#id_reseller").change(function() {
-        let id_reseller = $(this).val();
-        if (id_reseller != '') {
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url() ?>penjualan/get_reseller",
-                data: '&id_reseller=' + id_reseller,
-                dataType: 'JSON',
-                success: function(response) {
-                    $('#nama_pembeli').val(response.nama);
-                    $('#alamat_pembeli').val(response.alamat);
-                    $('#no_telp_pembeli').val(response.no_telp);
-                    $('#kelas_reseller').val(response.kelas);
-                }
-            })
-        } else {
-            $('#nama_pembeli').val('');
-            $('#alamat_pembeli').val('');
-            $('#no_telp_pembeli').val('');
-            $('#kelas_reseller').val('');
-        }
-    })
     // ADD DATA PENJUALAN -------------------------------------------------------------------------- ADD DATA PENJUALAN
 
 
 
 
 
-    // RESUME TRANSAKSI PENJUALAN ------------------------------------------------------------------- RESUME TRANSAKSI PENJUALAN
-    function resume(id) {
-        window.location = '<?= base_url() ?>penjualan/buat/' + id;
+    // LIST TRANSAKSI PENJUALAN ------------------------------------------------------------------- LIST TRANSAKSI PENJUALAN
+    function list(id) {
+        window.location = '<?= base_url() ?>penjualanlist/' + id;
     }
-    // RESUME TRANSAKSI PENJUALAN ------------------------------------------------------------------- RESUME TRANSAKSI PENJUALAN
+    // LIST TRANSAKSI PENJUALAN ------------------------------------------------------------------- LIST TRANSAKSI PENJUALAN
 
 
 

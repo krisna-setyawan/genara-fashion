@@ -33,9 +33,9 @@ class LihatProduk extends CI_Controller
     public function getProdukById($id)
     {
         $q = "SELECT produk.*, suplier.nama as suplier, kategori.kategori as kategori, warna.warna as warna FROM produk
-            JOIN suplier ON produk.id_suplier = suplier.id
-            JOIN kategori ON produk.id_kategori = kategori.id
-            JOIN warna ON produk.id_warna = warna.id
+            LEFT JOIN suplier ON produk.id_suplier = suplier.id
+            LEFT JOIN kategori ON produk.id_kategori = kategori.id
+            LEFT JOIN warna ON produk.id_warna = warna.id
             WHERE produk.id = $id";
         $data = $this->db->query($q)->row_array();
 
