@@ -57,56 +57,6 @@ function format_rupiah(angka) {
 })();
 // FORM VALIDATION ---------------------------------------------------------------------------------
 
-// FORM VALIDATION TAMBAH LIST BARANG PEMBELIAN ----------------------------------------------------
-function validasi_add_list_pembelian() {
-	if ($("#id_pembelian").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "id_pembelian kosong!",
-		});
-	} else if ($("#id_suplier").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "id_suplier kosong!",
-		});
-	} else if ($("#no_pembelian").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "no_pembelian kosong!",
-		});
-	} else if ($("#harga_jual").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "Barang Belum dipilih!",
-		});
-	} else if ($("#id_barang").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "Barang Belum dipilih!",
-		});
-	} else if ($("#hg_total").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "Data tidak Lengkap!",
-		});
-	} else if ($("#jumlah_barang").val() == "") {
-		Swal.fire({
-			icon: "error",
-			title: "Gagal...",
-			text: "Jumlah barang belum diisi!",
-		});
-	} else {
-		tambahListBarang();
-	}
-}
-// FORM VALIDATION TAMBAH LIST BARANG PEMBELIAN ----------------------------------------------------
-
 // FORM VALIDATION TAMBAH LIST BARANG PENJUALAN ----------------------------------------------------
 function validasi_add_list_penjualan() {
 	if ($("#id_penjualan").val() == "") {
@@ -115,41 +65,41 @@ function validasi_add_list_penjualan() {
 			title: "Gagal...",
 			text: "id_penjualan kosong!",
 		});
-	} else if ($("#id_suplier").val() == "") {
+	} else if ($("#var_id_produk").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "id_suplier kosong!",
+			text: "Produk Belum dipilih!",
 		});
-	} else if ($("#no_penjualan").val() == "") {
+	} else if ($("#qty").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "no_penjualan kosong!",
+			text: "QTY Produk belum diisi!",
 		});
-	} else if ($("#harga_jual").val() == "") {
+	} else if ($("#var_hpp_produk").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "Barang Belum dipilih!",
+			text: "hpp produk kosong!",
 		});
-	} else if ($("#id_barang").val() == "") {
+	} else if ($("#var_hpp_sablon").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "Barang Belum dipilih!",
+			text: "hpp sablon kosong!",
 		});
-	} else if ($("#hg_total").val() == "") {
+	} else if ($("#var_harga_jual").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "Data tidak Lengkap!",
+			text: "harga jual kosong!",
 		});
-	} else if ($("#jumlah_barang").val() == "") {
+	} else if ($("#var_total_harga").val() == "") {
 		Swal.fire({
 			icon: "error",
 			title: "Gagal...",
-			text: "Jumlah barang belum diisi!",
+			text: "harga jual kosong!",
 		});
 	} else {
 		tambahListBarang();

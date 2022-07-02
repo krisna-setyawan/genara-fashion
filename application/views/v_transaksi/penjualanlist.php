@@ -10,105 +10,105 @@
                 <div class="card-body" style="padding: 15px;">
 
                     <input type="hidden" id="id_penjualan" name="id_penjualan" value="<?= $penjualan['id'] ?>">
-                    <input type="hidden" id="hg_reseller" name="hg_reseller" value="<?= $penjualan['hg_reseller'] ?>">
-                    <input type="hidden" id="id_barang" name="id_barang">
-                    <input type="hidden" id="grand_beli" name="grand_beli">
                     <input type="hidden" id="grand_total" name="grand_total">
-                    <input type="hidden" id="grand_laba" name="grand_laba">
 
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Jenis Penjualan</b></div>
-                                <input readonly type="text" class="form-control" id="jenis_penjualan" name="jenis_penjualan" value="<?= $penjualan['jenis_penjualan'] ?>">
-                            </div>
+                        <div class="col-lg-6 mb-4">
+                            <table style="width: 100%; font-size: 17px;">
+                                <tr>
+                                    <td width="40%">Jenis Penjualan</td>
+                                    <td width="5%">:</td>
+                                    <td width="55%"><b> <?= $penjualan['jenis_penjualan'] ?> </b></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal</td>
+                                    <td>:</td>
+                                    <td><b> <?= $penjualan['tanggal'] ?> </b></td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor Penjualan</td>
+                                    <td>:</td>
+                                    <td><b> <?= $penjualan['no_penjualan'] ?> </b></td>
+                                </tr>
+                                <tr>
+                                    <td>Nama Pembeli</td>
+                                    <td>:</td>
+                                    <td><b> <?= $penjualan['nama_pembeli'] ?> </b></td>
+                                </tr>
+                                <tr>
+                                    <td>Alamat</td>
+                                    <td>:</td>
+                                    <td><b> <?= $penjualan['alamat_pembeli'] ?> </b></td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor Telepon</td>
+                                    <td>:</td>
+                                    <td><b> <?= $penjualan['no_telp_pembeli'] ?> </b></td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="col-lg-6">
                             <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Tanggal</b></div>
-                                <input readonly type="text" class="form-control" id="tanggal" name="tanggal" value="<?= $penjualan['tanggal'] ?>">
+                                <div class="input-group-text"><b>Produk</b></div>
+                                <input autocomplete="off" list="datalist_produk" class="form-control" id="nama_produk" name="nama_produk">
+                                <datalist id="datalist_produk">
+                                    <?php foreach ($produk as $pd) { ?>
+                                        <option value="<?= $pd->kode_produk ?> - <?= $pd->nama_produk ?>"></option>
+                                    <?php } ?>
+                                </datalist>
                             </div>
-                        </div>
-                        <div class="col-md-4">
                             <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>No Penjualan </b></div>
-                                <input readonly type="text" class="form-control" id="no_penjualan" name="no_penjualan" value="<?= $penjualan['no_penjualan'] ?>">
+                                <div class="input-group-text"><b>QTY</b></div>
+                                <input autocomplete="off" type="text" class="form-control" id="qty" name="qty" onkeypress="return hanyaAngka(event)" maxlength="6">
                             </div>
+
+                            <div class="py-1 px-2 mb-3" style="border: grey solid 1px; border-radius: 5px;">
+                                <input type="hidden" id="var_id_produk">
+                                <input type="hidden" id="var_hpp_produk">
+                                <input type="hidden" id="var_hpp_sablon">
+                                <input type="hidden" id="var_harga_jual">
+                                <input type="hidden" id="var_total_harga">
+
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td width="35%">HPP Produk</td>
+                                        <td width="5%">:</td>
+                                        <td width="60%" id="text_hpp_produk"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>HPP Sablon</td>
+                                        <td>:</td>
+                                        <td id="text_hpp_sablon"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Harga Jual</td>
+                                        <td>:</td>
+                                        <td id="text_harga_jual"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Harga</td>
+                                        <td>:</td>
+                                        <td id="text_total_harga"></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <button onclick="validasi_add_list_penjualan()" class="btn btn-lg btn-block btn-primary">Tambahkan Produk</button>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Pembeli</b></div>
-                                <input readonly type="text" class="form-control" id="nama_pembeli" name="nama_pembeli" value="<?= $penjualan['nama_pembeli'] ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Alamat</b></div>
-                                <input readonly type="text" class="form-control" id="alamat_pembeli" name="alamat_pembeli" value="<?= $penjualan['alamat_pembeli'] ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>No Telp</b>an</div>
-                                <input readonly type="text" class="form-control" id="no_telp_pembeli" name="no_telp_pembeli" value="<?= $penjualan['no_telp_pembeli'] ?>">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Barang</b></div>
-                                <input type="text" class="form-control" id="nama_barang" name="nama_barang" onkeyup="autocomplete_barang()" maxlength="50">
-                                <div id="barang_list"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Hg Satuan</b></div>
-                                <input readonly type="text" class="form-control" id="harga_jual" name="harga_jual">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Stok</b></div>
-                                <input readonly type="text" class="form-control" id="stok" name="stok">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Jumlah</b></div>
-                                <input type="text" class="form-control" id="jumlah_barang" name="jumlah_barang" onkeypress="return hanyaAngka(event)" maxlength="6">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Hg Total</b></div>
-                                <input readonly type="text" class="form-control" id="hg_total" name="hg_total">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <button onclick="validasi_add_list_penjualan()" class="btn btn-lg btn-block btn-primary">Tambahkan Barang</button>
-                        </div>
-                    </div>
-
-                    <hr>
+                    <hr class="my-4">
 
                     <div class="table-responsive mt-3">
-                        <table class="table table-hover table-warning table-bordered table-striped" style="white-space: nowrap" id="dataTable" width="100%">
+                        <table class="table table-hover table-success table-bordered table-striped" style="white-space: nowrap" id="dataTable" width="100%">
                             <thead>
-                                <tr class="text-center">
+                                <tr class="text-center" style="vertical-align: middle;">
                                     <th width="5%">No</th>
-                                    <th width="10%">Kode Brg</th>
-                                    <th width="37%">Nama Barang</th>
+                                    <th width="10%">Kode</th>
+                                    <th width="37%">Nama Produk</th>
                                     <th width="10%">Qty</th>
-                                    <th width="15%">Hg Satuan</th>
+                                    <th width="15%">HPP <br> Produk + Sablon</th>
                                     <th width="15%">Total</th>
                                     <th width="8%">Aksi</th>
                                 </tr>
@@ -126,25 +126,7 @@
                     <hr>
 
                     <div class="row justify-content-end mt-4">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Bayar Rp.</b></div>
-                                <input id="jumlah_bayar" style="height: 60px; font-size: 45px; text-align: right;" onchange="hitung_kembalian()" type="number" min="1000" max="100000000" step="1000" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group input-group-lg mb-2 mr-sm-2">
-                                <div class="input-group-text"><b>Kembalian Rp.</b></div>
-                                <input id="jumlah_kembalian" style="height: 60px; font-size: 45px; text-align: right;" readonly type="number" min="1000" max="100000000" step="1000" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-end">
-
-                    </div>
-
-                    <div class="row justify-content-end mt-4">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <button onclick="validasi_simpan_penjualan(<?= $penjualan['id'] ?>)" class="btn btn-lg btn-block btn-success">Simpan Penjualan</button>
                         </div>
                     </div>
@@ -195,8 +177,8 @@
                         <thead>
                             <tr>
                                 <th width="65%">Nama Barang</th>
-                                <th width="10%">Jumlah</th>
-                                <th width="10%" class="text-right">Satuan</th>
+                                <th width="10%">QTY</th>
+                                <th width="10%" class="text-right">HPP</th>
                                 <th width="15%" class="text-right">Total</th>
                             </tr>
                         </thead>
@@ -207,14 +189,6 @@
                         <tr>
                             <th colspan="3" class="text-right"> Total </th>
                             <th class="text-right" id="detail_grand_total">Rp. 0</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" class="text-right"> Bayar </th>
-                            <th class="text-right" id="detail_jumlah_bayar">Rp. 0</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" class="text-right"> Kembalian </th>
-                            <th class="text-right" id="detail_jumlah_kembalian">Rp. 0</th>
                         </tr>
                     </table>
 
@@ -235,17 +209,6 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        // Format mata uang.
-        $('#jumlah_bayar').mask('000.000.000', {
-            reverse: true
-        });
-    })
-
-
-
-
-
     function load_data_penjualan(id_penjualan) {
         $.ajax({
             type: 'post',
@@ -264,128 +227,102 @@
                 let g_total = format_rupiah(data.grand_total);
                 $('#text_grand_total').html('<b> Rp. ' + g_total + '</b>');
                 $('#grand_total').val(data.grand_total);
-                $('#grand_laba').val(data.grand_laba);
-                $('#grand_beli').val(data.grand_beli);
             }
         })
     }
 
-    function autocomplete_barang() {
-        $("#nama_barang").autocomplete({
-            source: "<?php echo base_url('penjualan/barang_autocomplete'); ?>",
-        });
-    }
-
-    $("#nama_barang").change(function() {
-        let nm_brg = $(this).val();
-        let hg_reseller = $("#hg_reseller").val();
-        if (nm_brg != '') {
+    $("#nama_produk").change(function() {
+        let nm_produk = $(this).val();
+        if (nm_produk != '') {
             $.ajax({
-                url: "<?= base_url() ?>penjualan/get_barang_autocomplete",
+                url: "<?= base_url() ?>penjualan/get_produk_autocomplete",
                 type: "post",
-                data: "&nm_brg=" + nm_brg,
+                data: "&nm_produk=" + nm_produk,
                 dataType: 'JSON',
                 success: function(data) {
                     if (data.kodeku == 'ada') {
-                        $('#id_barang').val(data.id);
-                        if (hg_reseller == 'hg_reseller1') {
-                            $('#harga_jual').val(data.hg_reseller1);
-                        } else if (hg_reseller == 'hg_reseller2') {
-                            $('#harga_jual').val(data.hg_reseller2);
-                        } else if (hg_reseller == 'hg_reseller3') {
-                            $('#harga_jual').val(data.hg_reseller3);
-                        } else if (hg_reseller == 'hg_reseller4') {
-                            $('#harga_jual').val(data.hg_reseller4);
-                        } else {
-                            $('#harga_jual').val(data.harga_jual);
-                        }
-                        $('#stok').val(data.stok);
-                        $('#hg_total').val('');
-                        $('#jumlah_barang').val('');
+                        $('#var_id_produk').val(data.id_produk);
+                        $('#var_hpp_produk').val(data.hpp_produk);
+                        $('#var_hpp_sablon').val(data.hpp_sablon);
+                        $('#var_harga_jual').val(data.harga_jual);
+                        $('#text_hpp_produk').html(format_rupiah(data.hpp_produk));
+                        $('#text_hpp_sablon').html(format_rupiah(data.hpp_sablon));
+                        $('#text_harga_jual').html(format_rupiah(data.harga_jual));
+                        $('#text_total_harga').html('');
+                        $('#qty').val('');
                     } else {
-                        $('#harga_jual').val('');
-                        $('#stok').val('');
-                        $('#hg_total').val('');
-                        $('#jumlah_barang').val('');
+                        $('#var_id_produk').val('');
+                        $('#var_hpp_produk').val('');
+                        $('#var_hpp_sablon').val('');
+                        $('#var_harga_jual').val('');
+                        $('#text_hpp_produk').html('');
+                        $('#text_hpp_sablon').html('');
+                        $('#text_harga_jual').html('');
+                        $('#text_total_harga').html('');
+                        $('#qty').val('');
                     }
                 }
             });
         } else {
-            $('#harga_jual').val('');
-            $('#stok').val('');
-            $('#hg_total').val('');
-            $('#jumlah_barang').val('');
+            $('#text_hpp_produk').html('');
+            $('#text_hpp_sablon').html('');
+            $('#text_harga_jual').html('');
+            $('#text_total_harga').html('');
+            $('#qty').val('');
         }
     })
 
-    $("#jumlah_barang").change(function() {
-        let jml_brg = $(this).val();
-        let hg_brg = $('#harga_jual').val();
-        let stok = $('#stok').val();
-        let barang = $('#nama_barang').val();
+    $("#qty").change(function() {
+        let qty = $(this).val();
+        let harga_jual = $('#var_harga_jual').val();
 
-        let fix_stok = parseFloat(stok);
-        let fix_jml_brg = parseFloat(jml_brg);
-
-
-        if (fix_stok != 0) {
-            if (fix_jml_brg != 0) {
-                if (fix_stok >= fix_jml_brg) {
-                    let hg_total = fix_jml_brg * hg_brg;
-                    $('#hg_total').val(hg_total);
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Jumlah barang yang dibeli melebihi Stok!',
-                    })
-                    $('#hg_total').val('');
-                }
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal...',
-                    text: 'Jumlah barang yang dibeli tidak bisa 0!',
-                })
-                $('#hg_total').val('');
-            }
+        if (qty != 0) {
+            let total_harga = qty * harga_jual;
+            $('#text_total_harga').html(format_rupiah(total_harga));
+            $('#var_total_harga').val(total_harga);
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal...',
-                text: 'Barang yang dibeli sudah habis!',
+                text: 'Jumlah barang yang dibeli tidak bisa 0!',
             })
+            $('#total_harga').html('');
+            $('#var_total_harga').val('');
         }
-
     })
 
 
 
 
 
-    // TAMBAH LIST & SIMPAN PENJUALAN
+    // TAMBAH LIST HAPUS LIST
     function tambahListBarang() {
         let id_penjualan = $('#id_penjualan').val();
         $.ajax({
             type: 'post',
             url: '<?= base_url() ?>penjualan/add_list',
             data: '&id_penjualan=' + $('#id_penjualan').val() +
-                '&id_barang=' + $('#id_barang').val() +
-                '&no_penjualan=' + $('#no_penjualan').val() +
-                '&jumlah=' + $('#jumlah_barang').val() +
-                '&hg_satuan=' + $('#harga_jual').val() +
-                '&hg_total=' + $('#hg_total').val(),
+                '&id_produk=' + $('#var_id_produk').val() +
+                '&qty=' + $('#qty').val(),
             success: function() {
                 Swal.fire(
                     'Berhasil!',
                     'Berhasil menambah barang !',
                     'success'
                 )
-                $('#nama_barang').val('');
-                $('#harga_jual').val('');
-                $('#stok').val('');
-                $('#jumlah_barang').val('');
-                $('#hg_total').val('');
+                $('#qty').val('');
+                $('#nama_produk').val('');
+
+                $('#var_id_produk').val('');
+                $('#var_hpp_produk').val('');
+                $('#var_hpp_sablon').val('');
+                $('#var_harga_jual').val('');
+
+                $('#text_hpp_produk').html('');
+                $('#text_hpp_sablon').html('');
+                $('#text_harga_jual').html('');
+                $('#text_total_harga').html('');
+
                 load_data_penjualan(id_penjualan);
             }
         })
@@ -403,16 +340,16 @@
                     'Berhasil menghapus barang !',
                     'success'
                 )
-                $('#nama_barang').val('');
-                $('#harga_jual').val('');
-                $('#stok').val('');
-                $('#jumlah_barang').val('');
-                $('#hg_total').val('');
                 load_data_penjualan(id_penjualan);
             }
         })
     }
 
+
+
+
+
+    // SIMPAN PENJUALAN
     function validasi_simpan_penjualan(id_penjualan) {
         $.ajax({
             url: "<?= base_url() ?>penjualan/validasi_simpan_jual",
@@ -425,7 +362,7 @@
                 } else {
                     Swal.fire(
                         'Maaf...',
-                        'Anda belum menambahkan daftar barang jual apapun !',
+                        'Anda belum menambahkan daftar Produk apapun !',
                         'error'
                     )
                 }
@@ -433,91 +370,26 @@
         });
     }
 
-    function hitung_kembalian() {
-        let grand_total = $('#grand_total').val();
-        let bayar = $('#jumlah_bayar').val();
-
-        if (grand_total == 0) {
-            Swal.fire(
-                'Maaf...',
-                'Anda belum menambahkan daftar barang jual apapun !',
-                'error'
-            )
-            $('#jumlah_bayar').val('');
-        } else {
-            bayar = bayar.replace(/\./g, '');
-            bayar = parseInt(bayar, 10);
-
-            let jumlah_kembalian = bayar - grand_total;
-            if (jumlah_kembalian < 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Gagal!',
-                    text: 'Jumlah Bayar Kurang !',
-                })
-                $('#jumlah_kembalian').val('');
-            } else {
-                $('#jumlah_kembalian').val(jumlah_kembalian);
-                $('#jumlah_kembalian').mask('000.000.000', {
-                    reverse: true
-                });
-            }
-        }
-    }
-
     function simpan_penjualan(id_penjualan) {
-        var grand_beli = $('#grand_beli').val();
         var grand_total = $('#grand_total').val();
-        var grand_laba = $('#grand_laba').val();
-        let jumlah_bayar = $('#jumlah_bayar').val();
-        let jumlah_kembalian = $('#jumlah_kembalian').val();
 
-        bayar = jumlah_bayar.replace(/\./g, '');
-        bayar = parseInt(bayar, 10);
-        kembalian = jumlah_kembalian.replace(/\./g, '');
-        kembalian = parseInt(kembalian, 10);
-
-        if (jumlah_bayar == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Gagal!',
-                text: 'Jumlah Bayar Belum diisi !',
-            })
-        } else if (jumlah_kembalian == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Gagal!',
-                text: 'Jumlah Kembalian Belum diisi !',
-            })
-        } else if (kembalian > bayar) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Gagal!',
-                text: 'Jumlah Kembalian Salah !',
-            })
-        } else {
-            $.ajax({
-                type: 'post',
-                url: '<?= base_url() ?>penjualan/simpan_penjualan',
-                data: '&id_penjualan=' + id_penjualan +
-                    '&grand_beli=' + grand_beli +
-                    '&grand_total=' + grand_total +
-                    '&grand_laba=' + grand_laba +
-                    '&jumlah_bayar=' + bayar +
-                    '&jumlah_kembalian=' + kembalian,
-                success: function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Berhasil simpan transaksi penjualan !',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        detail(id_penjualan);
-                    });;
-                }
-            })
-        }
+        $.ajax({
+            type: 'post',
+            url: '<?= base_url() ?>penjualan/simpan_penjualan',
+            data: '&id_penjualan=' + id_penjualan +
+                '&grand_total=' + grand_total,
+            success: function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Berhasil simpan transaksi penjualan !',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then(function() {
+                    detail(id_penjualan);
+                });;
+            }
+        })
     }
 
 
@@ -538,8 +410,6 @@
                 $('#detail_no_penjualan').html(response.no_penjualan);
                 $('#detail_tanggal').html(response.tanggal);
                 $('#detail_grand_total').html('Rp. ' + format_rupiah(response.grand_total));
-                $('#detail_jumlah_bayar').html('Rp. ' + format_rupiah(response.jumlah_bayar));
-                $('#detail_jumlah_kembalian').html('Rp. ' + format_rupiah(response.jumlah_kembalian));
             }
         })
         $.ajax({

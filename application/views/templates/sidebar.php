@@ -9,11 +9,11 @@
         <!-- query untuk menu -->
         <?php
         $id_user = $this->session->userdata('id_user');
-        $queryMenu = "  SELECT `user_menu`.*
-                    FROM `user_menu` JOIN `user_access_menu` 
-                    ON `user_menu`.`id` = `user_access_menu`.`id_menu`
-                    WHERE `user_access_menu`.`id_user` = $id_user
-                    ORDER BY `user_access_menu`.`id_menu` ASC
+        $queryMenu = "  SELECT user_menu.*
+                    FROM user_menu JOIN user_access_menu 
+                    ON user_menu.id = user_access_menu.id_menu
+                    WHERE user_access_menu.id_user = $id_user
+                    ORDER BY user_access_menu.id_menu ASC
                 ";
         $menu = $this->db->query($queryMenu)->result_array();
         ?>

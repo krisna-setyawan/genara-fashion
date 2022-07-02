@@ -14,9 +14,9 @@
                                 <tr class="text-center">
                                     <th width="5%">No</th>
                                     <th width="10%">Kode</th>
-                                    <th width="40%">Nama Produk</th>
-                                    <th width="19%">Harga Jual</th>
-                                    <th width="13%">Stok</th>
+                                    <th width="34%">Nama Produk</th>
+                                    <th width="19%">Harga Produk</th>
+                                    <th width="19%">Harga Sablon</th>
                                     <th width="13%">Aksi</th>
                                 </tr>
                             </thead>
@@ -27,8 +27,8 @@
                                         <td><?= $no++ ?></td>
                                         <td><?= $br->kode_produk ?></td>
                                         <td><?= $br->nama_produk ?></td>
-                                        <td>Rp. <?= number_format($br->harga_jual, 0, ',', '.') ?></td>
-                                        <td><?= $br->stok ?></td>
+                                        <td>Rp. <?= number_format($br->harga_produk, 0, ',', '.') ?></td>
+                                        <td>Rp. <?= number_format($br->harga_sablon, 0, ',', '.') ?></td>
                                         <td class="text-center">
                                             <a>
                                                 <button onclick="detail(<?= $br->id ?>)" class="badge btn-secondary">Detail</button>
@@ -77,10 +77,18 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Jual</p>
+                        <p>Harga Produk</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_harga_jual"></b></p>
+                        <p><b id="detail_harga_produk"></b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Harga Sablon</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b id="detail_harga_sablon"></b></p>
                     </div>
                 </div>
                 <div class="row">
@@ -162,7 +170,8 @@
             success: function(response) {
                 $('#detail_kode_produk').html(response.kode_produk);
                 $('#detail_nama_produk').html(response.nama_produk);
-                $('#detail_harga_jual').html('Rp. ' + format_rupiah(response.harga_jual));
+                $('#detail_harga_produk').html('Rp. ' + format_rupiah(response.harga_produk));
+                $('#detail_harga_sablon').html('Rp. ' + format_rupiah(response.harga_sablon));
                 $('#detail_suplier').html(response.suplier);
                 $('#detail_warna').html(response.warna);
                 $('#detail_motif').html(response.motif);

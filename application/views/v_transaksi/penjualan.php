@@ -159,8 +159,8 @@
                         <thead>
                             <tr>
                                 <th width="65%">Nama Barang</th>
-                                <th width="10%">Jumlah</th>
-                                <th width="10%" class="text-right">Satuan</th>
+                                <th width="10%">QTY</th>
+                                <th width="10%" class="text-right">HPP</th>
                                 <th width="15%" class="text-right">Total</th>
                             </tr>
                         </thead>
@@ -171,14 +171,6 @@
                         <tr>
                             <th colspan="3" class="text-right"> Total </th>
                             <th class="text-right" id="detail_grand_total">Rp. 0</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" class="text-right"> Bayar </th>
-                            <th class="text-right" id="detail_jumlah_bayar">Rp. 0</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" class="text-right"> Kembalian </th>
-                            <th class="text-right" id="detail_jumlah_kembalian">Rp. 0</th>
                         </tr>
                     </table>
 
@@ -278,7 +270,7 @@
 
     // LIST TRANSAKSI PENJUALAN ------------------------------------------------------------------- LIST TRANSAKSI PENJUALAN
     function list(id) {
-        window.location = '<?= base_url() ?>penjualanlist/' + id;
+        window.location = '<?= base_url() ?>penjualan/list/' + id;
     }
     // LIST TRANSAKSI PENJUALAN ------------------------------------------------------------------- LIST TRANSAKSI PENJUALAN
 
@@ -323,8 +315,6 @@
                 $('#detail_no_penjualan').html(response.no_penjualan);
                 $('#detail_tanggal').html(response.tanggal);
                 $('#detail_grand_total').html('Rp. ' + format_rupiah(response.grand_total));
-                $('#detail_jumlah_bayar').html('Rp. ' + format_rupiah(response.jumlah_bayar));
-                $('#detail_jumlah_kembalian').html('Rp. ' + format_rupiah(response.jumlah_kembalian));
             }
         })
         $.ajax({

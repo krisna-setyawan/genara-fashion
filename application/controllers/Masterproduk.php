@@ -36,7 +36,7 @@ class Masterproduk extends CI_Controller
     // CRUD PRODUK --------------------------------------------------------------------------------------- CRUD PRODUK   
     public function add_produk_aksi()
     {
-        $harga_jual = str_replace(".", "", $this->input->post('harga_jual'));
+        $harga_beli = str_replace(".", "", $this->input->post('harga_beli'));
         $harga_produk = str_replace(".", "", $this->input->post('harga_produk'));
         $harga_sablon = str_replace(".", "", $this->input->post('harga_sablon'));
 
@@ -44,7 +44,7 @@ class Masterproduk extends CI_Controller
             'kode_produk' => $this->input->post('kode_produk'),
             'nama_produk' => $this->input->post('nama_produk'),
             'id_suplier' => $this->input->post('id_suplier'),
-            'harga_jual' => $harga_jual,
+            'harga_beli' => $harga_beli,
             'harga_produk' => $harga_produk,
             'harga_sablon' => $harga_sablon,
             'id_kategori' => $this->input->post('id_kategori'),
@@ -84,16 +84,16 @@ class Masterproduk extends CI_Controller
         $id =  $this->input->post('edit_id');
 
         $edit_harga_produk = str_replace(".", "", $this->input->post('edit_harga_produk'));
-        $edit_harga_jual = str_replace(".", "", $this->input->post('edit_harga_jual'));
         $edit_harga_sablon = str_replace(".", "", $this->input->post('edit_harga_sablon'));
+        $edit_harga_beli = str_replace(".", "", $this->input->post('edit_harga_beli'));
 
         $data = array(
             'kode_produk' => $this->input->post('edit_kode_produk'),
             'nama_produk' => $this->input->post('edit_nama_produk'),
             'id_suplier' => $this->input->post('edit_id_suplier'),
-            'harga_jual' => $edit_harga_jual,
             'harga_produk' => $edit_harga_produk,
             'harga_sablon' => $edit_harga_sablon,
+            'harga_beli' => $edit_harga_beli,
             'id_kategori' => $this->input->post('edit_id_kategori'),
             'id_warna' => $this->input->post('edit_id_warna'),
             'motif' => $this->input->post('edit_motif'),

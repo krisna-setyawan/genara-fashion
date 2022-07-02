@@ -19,9 +19,9 @@
                                     <th width="5%">No</th>
                                     <th width="10%">Kode</th>
                                     <th width="32%">Nama Produk</th>
+                                    <th width="11%">HPP Produk</th>
+                                    <th width="11%">HPP Sablon</th>
                                     <th width="11%">Harga Beli</th>
-                                    <th width="11%">Harga Jual</th>
-                                    <th width="11%">Stok</th>
                                     <th width="20%">Aksi</th>
                                 </tr>
                             </thead>
@@ -34,7 +34,7 @@
                                         <td><?= $br->nama_produk ?></td>
                                         <td>Rp. <?= number_format($br->harga_produk, 0, ',', '.') ?></td>
                                         <td>Rp. <?= number_format($br->harga_sablon, 0, ',', '.') ?></td>
-                                        <td>Rp. <?= number_format($br->harga_jual, 0, ',', '.') ?></td>
+                                        <td>Rp. <?= number_format($br->harga_beli, 0, ',', '.') ?></td>
                                         <td class="text-center">
                                             <a>
                                                 <button onclick="detail(<?= $br->id ?>)" class="badge btn-secondary">Detail</button>
@@ -99,24 +99,24 @@
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Produk</label>
+                        <label class="col-sm-3 col-form-label">HPP Produk</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="harga_produk" name="harga_produk" required>
-                            <div class="invalid-feedback">Harga Produk harus diisi.</div>
+                            <div class="invalid-feedback">HPP Produk harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Sablon</label>
+                        <label class="col-sm-3 col-form-label">HPP Sablon</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="harga_sablon" name="harga_sablon" required>
-                            <div class="invalid-feedback">Harga Sablon harus diisi.</div>
+                            <div class="invalid-feedback">HPP Sablon harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Jual</label>
+                        <label class="col-sm-3 col-form-label">Harga Beli</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-lg" id="harga_jual" name="harga_jual" required>
-                            <div class="invalid-feedback">Harga Jual harus diisi.</div>
+                            <input type="text" class="form-control form-control-lg" id="harga_beli" name="harga_beli" required>
+                            <div class="invalid-feedback">Harga Beli harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
@@ -223,24 +223,24 @@
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Produk</label>
+                        <label class="col-sm-3 col-form-label">HPP Produk</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="edit_harga_produk" name="edit_harga_produk" required>
-                            <div class="invalid-feedback">Harga Produk harus diisi.</div>
+                            <div class="invalid-feedback">HPP Produk harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Sablon</label>
+                        <label class="col-sm-3 col-form-label">HPP Sablon</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-lg" id="edit_harga_sablon" name="edit_harga_sablon" required>
-                            <div class="invalid-feedback">Harga Sablon harus diisi.</div>
+                            <div class="invalid-feedback">HPP Sablon harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label">Harga Jual</label>
+                        <label class="col-sm-3 col-form-label">Harga Beli</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-lg" id="edit_harga_jual" name="edit_harga_jual" required>
-                            <div class="invalid-feedback">Harga Jual harus diisi.</div>
+                            <input type="text" class="form-control form-control-lg" id="edit_harga_beli" name="edit_harga_beli" required>
+                            <div class="invalid-feedback">Harga Beli harus diisi.</div>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
@@ -344,7 +344,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Produk</p>
+                        <p>HPP Produk</p>
                     </div>
                     <div class="col-6">
                         <p><b id="detail_harga_produk"></b></p>
@@ -352,7 +352,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Sablon</p>
+                        <p>HPP Sablon</p>
                     </div>
                     <div class="col-6">
                         <p><b id="detail_harga_sablon"></b></p>
@@ -360,10 +360,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Jual</p>
+                        <p>Harga Beli</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_harga_jual"></b></p>
+                        <p><b id="detail_harga_beli"></b></p>
                     </div>
                 </div>
                 <div class="row">
@@ -424,7 +424,7 @@
         });
 
         // Format mata uang.
-        $('#harga_jual').mask('000.000.000', {
+        $('#harga_beli').mask('000.000.000', {
             reverse: true
         });
         $('#harga_produk').mask('000.000.000', {
@@ -434,7 +434,7 @@
             reverse: true
         });
 
-        $('#edit_harga_jual').mask('000.000.000', {
+        $('#edit_harga_beli').mask('000.000.000', {
             reverse: true
         });
         $('#edit_harga_produk').mask('000.000.000', {
@@ -454,7 +454,7 @@
         $('#kode_produk').val("");
         $('#nama_produk').val("");
         $('#id_suplier').val("");
-        $('#harga_jual').val("");
+        $('#harga_beli').val("");
         $('#harga_produk').val("");
         $('#harga_sablon').val("");
         $('#id_kategori').val("");
@@ -474,7 +474,7 @@
         $('#edit_kode_produk').val("");
         $('#edit_nama_produk').val("");
         $('#edit_id_suplier').val("");
-        $('#edit_harga_jual').val("");
+        $('#edit_harga_beli').val("");
         $('#edit_harga_produk').val("");
         $('#edit_harga_sablon').val("");
         $('#edit_id_kategori').val("");
@@ -494,7 +494,7 @@
                 $('#edit_kode_produk').val(response.kode_produk);
                 $('#edit_nama_produk').val(response.nama_produk);
                 $('#edit_id_suplier').val(response.id_suplier);
-                $('#edit_harga_jual').val(format_rupiah(response.harga_jual));
+                $('#edit_harga_beli').val(format_rupiah(response.harga_beli));
                 $('#edit_harga_produk').val(format_rupiah(response.harga_produk));
                 $('#edit_harga_sablon').val(format_rupiah(response.harga_sablon));
                 $('#edit_id_kategori').val(response.id_kategori);
@@ -543,7 +543,7 @@
             success: function(response) {
                 $('#detail_kode_produk').html(response.kode_produk);
                 $('#detail_nama_produk').html(response.nama_produk);
-                $('#detail_harga_jual').html('Rp. ' + format_rupiah(response.harga_jual));
+                $('#detail_harga_beli').html('Rp. ' + format_rupiah(response.harga_beli));
                 $('#detail_harga_produk').html('Rp. ' + format_rupiah(response.harga_produk));
                 $('#detail_harga_sablon').html('Rp. ' + format_rupiah(response.harga_sablon));
                 $('#detail_suplier').html(response.suplier);
