@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Lihatbarang extends CI_Controller
+class LihatProduk extends CI_Controller
 {
 
     public function __construct()
@@ -17,12 +17,12 @@ class Lihatbarang extends CI_Controller
 
         $data['profil_toko'] = $this->db->get_where('profil_toko', ['id' => 1])->row_array();
 
-        $data['barang'] = $this->db->get('barang')->result();
+        $data['produk'] = $this->db->get('produk')->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('v_utama/lihatbarang', $data);
+        $this->load->view('v_utama/lihatproduk', $data);
         $this->load->view('templates/footer');
     }
 
@@ -30,12 +30,14 @@ class Lihatbarang extends CI_Controller
 
 
 
-    public function getBarangById($id)
+    public function getProdukById($id)
     {
-        $where = array(
-            'id' => $id
-        );
-        $data = $this->db->get_where('barang', $where)->row_array();
+        $q = "SELECT produk.*, suplier.nama as suplier, kategori.kategori as kategori, warna.warna as warna FROM produk
+            JOIN suplier ON produk.id_suplier = suplier.id
+            JOIN kategori ON produk.id_kategori = kategori.id
+            JOIN warna ON produk.id_warna = warna.id
+            WHERE produk.id = $id";
+        $data = $this->db->query($q)->row_array();
 
         echo json_encode($data);
     }

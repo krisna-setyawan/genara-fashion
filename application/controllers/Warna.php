@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori extends CI_Controller
+class Warna extends CI_Controller
 {
 
 	public function __construct()
@@ -17,12 +17,12 @@ class Kategori extends CI_Controller
 
 		$data['profil_toko'] = $this->db->get_where('profil_toko', ['id' => 1])->row_array();
 
-		$data['kategori'] = $this->db->get('kategori')->result();
+		$data['warna'] = $this->db->get('warna')->result();
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/topbar', $data);
-		$this->load->view('v_master/kategori', $data);
+		$this->load->view('v_master/warna', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -30,13 +30,13 @@ class Kategori extends CI_Controller
 
 
 
-	// CRUD KATEGORI --------------------------------------------------------------------------------------- CRUD KATEGORI   
-	public function add_kategori_aksi()
+	// CRUD WARNA --------------------------------------------------------------------------------------- CRUD WARNA   
+	public function add_warna_aksi()
 	{
 		$data = array(
-			'kategori' => $this->input->post('nama'),
+			'warna' => $this->input->post('nama'),
 		);
-		$this->db->insert('kategori', $data);
+		$this->db->insert('warna', $data);
 
 		$this->session->set_flashdata('pesan', '
         <div class="alert alert-success alert-dismissible" role="alert mb-3">
@@ -44,33 +44,33 @@ class Kategori extends CI_Controller
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="alert-message">
-                <strong>Berhasil!</strong> Menambah data kategori.
+                <strong>Berhasil!</strong> Menambah data warna.
             </div>
         </div>
         ');
-		redirect('kategori');
+		redirect('warna');
 	}
 
-	public function getKategoriById($id)
+	public function getwarnaById($id)
 	{
 		$where = array(
 			'id' => $id
 		);
-		$data = $this->db->get_where('kategori', $where)->row_array();
+		$data = $this->db->get_where('warna', $where)->row_array();
 
 		echo json_encode($data);
 	}
 
-	public function edit_kategori_aksi()
+	public function edit_warna_aksi()
 	{
 		$id =  $this->input->post('edit_id');
 
 		$data = array(
-			'kategori' => $this->input->post('edit_nama'),
+			'warna' => $this->input->post('edit_nama'),
 		);
 
 		$this->db->where('id', $id);
-		$this->db->update('kategori', $data);
+		$this->db->update('warna', $data);
 
 		$this->session->set_flashdata('pesan', '
         <div class="alert alert-primary alert-dismissible" role="alert mb-3">
@@ -78,29 +78,29 @@ class Kategori extends CI_Controller
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="alert-message">
-                <strong>Berhasil!</strong> Edit data kategori.
+                <strong>Berhasil!</strong> Edit data warna.
             </div>
         </div>
         ');
-		redirect('kategori');
+		redirect('warna');
 	}
 
-	public function hapus_kategori($id)
+	public function hapus_warna($id)
 	{
 		$where = array('id' => $id);
 		$this->db->where($where);
-		$this->db->delete('kategori');
+		$this->db->delete('warna');
 		$this->session->set_flashdata('pesan', '
         <div class="alert alert-danger alert-dismissible" role="alert mb-3">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="alert-message">
-                <strong>Berhasil!</strong> Menghapus data kategori.
+                <strong>Berhasil!</strong> Menghapus data warna.
             </div>
         </div>
         ');
-		redirect('kategori');
+		redirect('warna');
 	}
-	// CRUD KATEGORI --------------------------------------------------------------------------------------- CRUD KATEGORI   
+	// CRUD WARNA --------------------------------------------------------------------------------------- CRUD WARNA   
 }

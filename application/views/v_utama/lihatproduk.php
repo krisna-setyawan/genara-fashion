@@ -1,7 +1,7 @@
 <main class="content" style="padding: 10px;">
     <!-- <div class="container" style="padding: 0px;"> -->
 
-    <h1 class="h3 mb-2 ml-3">Lihat Data Barang</h1>
+    <h1 class="h3 mb-2 ml-3">Lihat Data Produk</h1>
 
     <div class="row">
         <div class="col-12">
@@ -14,7 +14,7 @@
                                 <tr class="text-center">
                                     <th width="5%">No</th>
                                     <th width="10%">Kode</th>
-                                    <th width="40%">Nama Barang</th>
+                                    <th width="40%">Nama Produk</th>
                                     <th width="19%">Harga Jual</th>
                                     <th width="13%">Stok</th>
                                     <th width="13%">Aksi</th>
@@ -22,11 +22,11 @@
                             </thead>
                             <tbody>
                                 <?php $no = 1;
-                                foreach ($barang as $br) : ?>
+                                foreach ($produk as $br) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $br->kode_barang ?></td>
-                                        <td><?= $br->nama_barang ?></td>
+                                        <td><?= $br->kode_produk ?></td>
+                                        <td><?= $br->nama_produk ?></td>
                                         <td>Rp. <?= number_format($br->harga_jual, 0, ',', '.') ?></td>
                                         <td><?= $br->stok ?></td>
                                         <td class="text-center">
@@ -48,12 +48,12 @@
     <!-- </div> -->
 </main>
 
-<!-- Modal detail barang -->
-<div class="modal fade" id="modal-detail-barang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal detail produk -->
+<div class="modal fade" id="modal-detail-produk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Barang</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -61,18 +61,18 @@
             <div class="modal-body" style="font-size: large;">
                 <div class="row">
                     <div class="col-6">
-                        <p>Kode Barang</p>
+                        <p>Kode Produk</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_kode_barang"></b></p>
+                        <p><b id="detail_kode_produk"></b></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Nama Barang</p>
+                        <p>Nama Produk</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_nama_barang"></b></p>
+                        <p><b id="detail_nama_produk"></b></p>
                     </div>
                 </div>
                 <div class="row">
@@ -85,34 +85,42 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Jual Reseller 1</p>
+                        <p>Suplier</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_hg_reseller1"></b></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <p>Harga Jual Reseller 2</p>
-                    </div>
-                    <div class="col-6">
-                        <p><b id="detail_hg_reseller2"></b></p>
+                        <p><b id="detail_suplier"></b></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Jual Reseller 3</p>
+                        <p>Warna</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_hg_reseller3"></b></p>
+                        <p><b id="detail_warna"></b></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p>Harga Jual Reseller 4</p>
+                        <p>Motif</p>
                     </div>
                     <div class="col-6">
-                        <p><b id="detail_hg_reseller4"></b></p>
+                        <p><b id="detail_motif"></b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Kategori</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b id="detail_kategori"></b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Ukuran</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b id="detail_ukuran"></b></p>
                     </div>
                 </div>
                 <div class="row">
@@ -149,18 +157,19 @@
     function detail(id) {
         $.ajax({
             type: "GET",
-            url: "<?= base_url() ?>lihatbarang/getBarangById/" + id,
+            url: "<?= base_url() ?>lihatproduk/getProdukById/" + id,
             dataType: 'JSON',
             success: function(response) {
-                $('#detail_kode_barang').html(response.kode_barang);
-                $('#detail_nama_barang').html(response.nama_barang);
+                $('#detail_kode_produk').html(response.kode_produk);
+                $('#detail_nama_produk').html(response.nama_produk);
                 $('#detail_harga_jual').html('Rp. ' + format_rupiah(response.harga_jual));
-                $('#detail_hg_reseller1').html('Rp. ' + format_rupiah(response.hg_reseller1));
-                $('#detail_hg_reseller2').html('Rp. ' + format_rupiah(response.hg_reseller2));
-                $('#detail_hg_reseller3').html('Rp. ' + format_rupiah(response.hg_reseller3));
-                $('#detail_hg_reseller4').html('Rp. ' + format_rupiah(response.hg_reseller4));
+                $('#detail_suplier').html(response.suplier);
+                $('#detail_warna').html(response.warna);
+                $('#detail_motif').html(response.motif);
+                $('#detail_kategori').html(response.kategori);
+                $('#detail_ukuran').html(response.ukuran);
                 $('#detail_stok').html(response.stok);
-                $('#modal-detail-barang').modal('toggle');
+                $('#modal-detail-produk').modal('toggle');
             }
         })
     }

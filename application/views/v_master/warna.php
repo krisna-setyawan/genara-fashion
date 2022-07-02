@@ -1,7 +1,7 @@
 <main class="content" style="padding: 10px;">
 	<!-- <div class="container" style="padding: 0px;"> -->
 
-	<h1 class="h3 mb-2 ml-3">Data Kategori</h1>
+	<h1 class="h3 mb-2 ml-3">Data Warna</h1>
 
 	<div class="row">
 		<div class="col-12">
@@ -10,23 +10,23 @@
 
 					<?= $this->session->flashdata('pesan') ?>
 
-					<button class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah-kategori">Tambah Kategori</button>
+					<button class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah-warna">Tambah Warna</button>
 
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped" style="border: solid 1px #E5E8E8; white-space: nowrap" id="dataTable" width="100%">
 							<thead>
 								<tr class="text-center">
 									<th width="5%">No</th>
-									<th width="80%">Nama</th>
+									<th width="80%">Warna</th>
 									<th width="15%">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php $no = 1;
-								foreach ($kategori as $kt) : ?>
+								foreach ($warna as $kt) : ?>
 									<tr>
 										<td><?= $no++ ?></td>
-										<td><?= $kt->kategori ?></td>
+										<td><?= $kt->warna ?></td>
 										<td class="text-center">
 											<a>
 												<button onclick="edit(<?= $kt->id ?>)" class="badge btn-info">Edit</button>
@@ -49,23 +49,23 @@
 	<!-- </div> -->
 </main>
 
-<!-- Modal add kategori -->
-<div class="modal fade" id="modal-tambah-kategori" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal add warna -->
+<div class="modal fade" id="modal-tambah-warna" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Warna</h5>
 				<button type="button" onclick="batal_tambah()" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate autocomplete="off" id="form_tambah" method="POST" action="<?= base_url() ?>kategori/add_kategori_aksi">
+				<form class="needs-validation" novalidate autocomplete="off" id="form_tambah" method="POST" action="<?= base_url() ?>warna/add_warna_aksi">
 					<div class="form-group row mb-3">
-						<label class="col-sm-3 col-form-label">Nama Kategori</label>
+						<label class="col-sm-3 col-form-label">Nama Warna</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control form-control-lg" id="nama" name="nama" required>
-							<div class="invalid-feedback">Nama Kategori harus diisi.</div>
+							<div class="invalid-feedback">Nama warna harus diisi.</div>
 						</div>
 					</div>
 					<div class="row mt-5 mb-4 justify-content-center">
@@ -82,24 +82,24 @@
 	</div>
 </div>
 
-<!-- Modal edit kategori -->
-<div class="modal fade" id="modal-edit-kategori" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal edit warna -->
+<div class="modal fade" id="modal-edit-warna" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Edit Warna</h5>
 				<button type="button" onclick="batal_edit()" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate autocomplete="off" id="form_edit" method="POST" action="<?= base_url() ?>kategori/edit_kategori_aksi">
+				<form class="needs-validation" novalidate autocomplete="off" id="form_edit" method="POST" action="<?= base_url() ?>warna/edit_warna_aksi">
 					<input type="hidden" name="edit_id" id="edit_id">
 					<div class="form-group row mb-3">
-						<label class="col-sm-3 col-form-label">Nama Kategori</label>
+						<label class="col-sm-3 col-form-label">Nama Warna</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control form-control-lg" id="edit_nama" name="edit_nama" required>
-							<div class="invalid-feedback">Nama Kategori harus diisi.</div>
+							<div class="invalid-feedback">Nama warna harus diisi.</div>
 						</div>
 					</div>
 					<div class="row mt-5 mb-4 justify-content-center">
@@ -153,12 +153,12 @@
 	function edit(id) {
 		$.ajax({
 			type: "GET",
-			url: "<?= base_url() ?>kategori/getkategoriById/" + id,
+			url: "<?= base_url() ?>warna/getwarnaById/" + id,
 			dataType: 'JSON',
 			success: function(response) {
 				$('#edit_id').val(response.id);
-				$('#edit_nama').val(response.kategori);
-				$('#modal-edit-kategori').modal('toggle');
+				$('#edit_nama').val(response.warna);
+				$('#modal-edit-warna').modal('toggle');
 			}
 		})
 	}
@@ -181,7 +181,7 @@
 			cancelButtonText: 'Batal',
 		}).then((result) => {
 			if (result.isConfirmed) {
-				window.location.href = '<?= base_url() ?>kategori/hapus_kategori/' + id;
+				window.location.href = '<?= base_url() ?>warna/hapus_warna/' + id;
 			}
 		})
 	}

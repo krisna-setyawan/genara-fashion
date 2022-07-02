@@ -17,23 +17,30 @@ class Dashboard extends CI_Controller
 
 		$data['profil_toko'] = $this->db->get_where('profil_toko', ['id' => 1])->row_array();
 
-		$data['jml_barang'] = $this->db->count_all('barang');
+		$data['jml_produk'] = $this->db->count_all('produk');
 		$data['jml_suplier'] = $this->db->count_all('suplier');
 
 		date_default_timezone_set('Asia/Jakarta');
-		$hariini = date('Y-m-d');
+		$bulan = date('m');
+		$tahun = date('Y');
 
-		$this->db->where('tanggal', $hariini);
-		$data['pj_hariini'] = $this->db->count_all_results('penjualan');
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun]);
+		$data['pj_bulan_ini'] = $this->db->count_all_results('penjualan');
 
-		$this->db->where('status', 'Selesai');
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun, 'status' => 'Selesai']);
 		$data['pj_selesai'] = $this->db->count_all_results('penjualan');
 
-		$this->db->where('status', 'Proses');
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun, 'status' => 'Proses']);
 		$data['pj_proses'] = $this->db->count_all_results('penjualan');
 
-		$this->db->where('jenis_penjualan', 'umum');
-		$data['pj_umum'] = $this->db->count_all_results('penjualan');
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun, 'status' => 'Otw']);
+		$data['pj_otw'] = $this->db->count_all_results('penjualan');
+
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun, 'status' => 'Retur']);
+		$data['pj_retur'] = $this->db->count_all_results('penjualan');
+
+		$this->db->where(['month(tanggal)' => $bulan, 'year(tanggal)' => $tahun, 'status' => 'Batal']);
+		$data['pj_batal'] = $this->db->count_all_results('penjualan');
 
 
 

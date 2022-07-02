@@ -16,13 +16,13 @@
 								<div class="container-ku">
 									<div class="row">
 										<div class="col-8">
-											<a href="<?= base_url() ?>/lihatbarang">
-												<h4> Data Barang <br><br><b> <?= $jml_barang ?> Barang</b></h4>
+											<a href="<?= base_url() ?>/lihatproduk">
+												<h4> Data Produk <br><br><b> <?= $jml_produk ?> Produk</b></h4>
 											</a>
 										</div>
 										<div class="col-4">
-											<a href="<?= base_url() ?>/lihatbarang">
-												<img class="icon-dashboard" src="assets/icon/dashboard-icon-barang.png" style="width: 80px;" alt="">
+											<a href="<?= base_url() ?>/lihatproduk">
+												<img class="icon-dashboard" src="assets/icon/dashboard-icon-produk.png" style="width: 80px;" alt="">
 											</a>
 										</div>
 									</div>
@@ -63,20 +63,28 @@
 									</tr>
 								</thead>
 								<tr>
-									<td>Penjualan Hari ini</td>
-									<td class="text-center"><?= $pj_hariini ?></td>
+									<td>Penjualan Bulan ini</td>
+									<td class="text-center"><?= $pj_bulan_ini ?></td>
 								</tr>
 								<tr>
 									<td>Penjualan Selesai</td>
 									<td class="text-center"><?= $pj_selesai ?></td>
 								</tr>
 								<tr>
-									<td>Penjualan Masih Proses</td>
+									<td>Penjualan Proses</td>
 									<td class="text-center"><?= $pj_proses ?></td>
 								</tr>
 								<tr>
-									<td>Penjualan Umum</td>
-									<td class="text-center"><?= $pj_umum ?></td>
+									<td>Penjualan Otw</td>
+									<td class="text-center"><?= $pj_otw ?></td>
+								</tr>
+								<tr>
+									<td>Penjualan Retur</td>
+									<td class="text-center"><?= $pj_retur ?></td>
+								</tr>
+								<tr>
+									<td>Penjualan Batal</td>
+									<td class="text-center"><?= $pj_batal ?></td>
 								</tr>
 							</table>
 						</div>
