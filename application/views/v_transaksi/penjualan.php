@@ -185,6 +185,41 @@
     </div>
 </div>
 
+
+<!-- Modal ubah status -->
+<div class="modal fade" id="modal-status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate autocomplete="off" id="form_update_status" method="POST" action="<?= base_url() ?>penjualan/update_status">
+                    <input type="hidden" id="update_status_id_penjualan" name="update_status_id_penjualan">
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-3 col-form-label">Status Sekarang</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control" id="status_now" name="status_now" required>
+                                <option value="" selected>-- Pilih Status --</option>
+                                <option value="Otw">Otw</option>
+                                <option value="Selesai">Selesai</option>
+                                <option value="Retur">Retur</option>
+                                <option value="Batal">Batal</option>
+                            </select>
+                            <div class="invalid-feedback">Status harus diisi.</div>
+
+                        </div>
+                        <button type="submit" class="mt-4 btn btn-block btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         var table = $('#dataTable').DataTable({
@@ -275,6 +310,12 @@
     // LIST TRANSAKSI PENJUALAN ------------------------------------------------------------------- LIST TRANSAKSI PENJUALAN
 
 
+
+
+    function status(id) {
+        $('#update_status_id_penjualan').val(id);
+        $('#modal-status').modal('toggle');
+    }
 
 
 

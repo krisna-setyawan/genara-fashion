@@ -60,32 +60,22 @@ class Penjualan extends CI_Controller
             $row[] = $ls->jenis_penjualan;
             $row[] = $ls->nama_pembeli;
             $row[] = 'Rp. ' . number_format($ls->grand_total, 0, ',', '.');
-            $row[] = $ls->status;
+            if ($ls->status != 'Selesai') {
+                $row[] = '<b class="text-danger">' . $ls->status . '</b>';
+            } else {
+                $row[] = '<b class="text-primary">' . $ls->status . '</b>';
+            }
             // add html for action
             if ($ls->status == 'Unsaved') {
                 $row[] = '
-                        <a>
-                            <button class="badge btn-warning text-dark" onclick="list(' . $ls->id . ')"> List </button>
-                        </a>
-                        <a>
-                            <button class="badge btn-primary" onclick="status(' . $ls->id . ')"> Status </button>
-                        </a>
-                        <a>
-                            <button class="badge btn-danger" onclick="hapus(' . $ls->id . ')"> Hapus </button>
-                        </a>
-                    ';
+                        <button class="badge btn-warning text-dark" onclick="list(' . $ls->id . ')"> List </button>
+                        <button class="badge btn-primary" onclick="status(' . $ls->id . ')"> Status </button>
+                        <button class="badge btn-danger" onclick="hapus(' . $ls->id . ')"> Hapus </button>';
             } else {
                 $row[] = '
-                        <a>
-                            <button class="badge btn-secondary" onclick="detail(' . $ls->id . ')"> Detail </button>
-                        </a>
-                        <a>
-                            <button class="badge btn-primary" onclick="status(' . $ls->id . ')"> Status </button>
-                        </a>
-                        <a>
-                            <button class="badge btn-danger" onclick="hapus(' . $ls->id . ')"> Hapus </button>
-                        </a>
-                    ';
+                        <button class="badge btn-secondary" onclick="detail(' . $ls->id . ')"> Detail </button>
+                        <button class="badge btn-primary" onclick="status(' . $ls->id . ')"> Status </button>
+                        <button class="badge btn-danger" onclick="hapus(' . $ls->id . ')"> Hapus </button>';
             }
             $data[] = $row;
         }
@@ -119,6 +109,27 @@ class Penjualan extends CI_Controller
         $this->db->insert('no_pj_auto', $insert_no_pj_auto);
 
         redirect('penjualan/list/' . $id_penjualan);
+    }
+
+    public function update_status()
+    {
+        $id_penjualan = $this->input->post('update_status_id_penjualan');
+        $status = $this->input->post('status_now');
+
+        $this->db->where('id', $id_penjualan);
+        $this->db->update('penjualan', ['status' => $status]);
+
+        $this->session->set_flashdata('pesan', '
+        <div class="alert alert-info alert-dismissible" role="alert mb-3">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="alert-message">
+                <strong>Berhasil!</strong> Update Status penjualan.
+            </div>
+        </div>
+        ');
+        redirect('penjualan');
     }
 
     public function hapus_penjualan($id)
