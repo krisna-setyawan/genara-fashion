@@ -12,12 +12,12 @@
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a href="#toko" class="nav-link active" data-toggle="tab" id="pengaturan_toko">
-                                <p class="mt-2 mb-2 judul-pav"> <b> Pengaturan Toko </b> </p>
+                                <p class="mt-2 mb-2"> <b> Pengaturan Toko </b> </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#user" class="nav-link" data-toggle="tab" id="pengaturan_user">
-                                <p class="mt-2 mb-2 judul-pav"> <b> Pengaturan User </b> </p>
+                                <p class="mt-2 mb-2"> <b> Pengaturan User </b> </p>
                             </a>
                         </li>
                     </ul>

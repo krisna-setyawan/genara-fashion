@@ -111,13 +111,90 @@ class Penjualan extends CI_Controller
         redirect('penjualan/list/' . $id_penjualan);
     }
 
+    public function cek_status_penjualan()
+    {
+        $id_penjualan = $this->input->post('id_penjualan');
+
+        $penjualan = $this->db->get_where('penjualan_detail', ['id_penjualan' => $id_penjualan])->row_array();
+
+        if ($penjualan['status_tagihan'] == 'Lunas') {
+            $data['status'] = 'no';
+        } else {
+            $data['status'] = 'yes';
+        }
+
+        echo json_encode($data);
+    }
+
     public function update_status()
     {
         $id_penjualan = $this->input->post('update_status_id_penjualan');
         $status = $this->input->post('status_now');
 
-        $this->db->where('id', $id_penjualan);
-        $this->db->update('penjualan', ['status' => $status]);
+        $penjualan = $this->db->get_where('penjualan', ['id' => $id_penjualan])->row_array();
+
+        if ($penjualan['status'] != 'Retur') {
+            $this->db->where('id', $id_penjualan);
+            $this->db->update('penjualan', ['status' => $status]);
+
+            switch ($status) {
+                case 'Batal':
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Batal']);
+                    break;
+                case 'Retur':
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Retur']);
+
+                    // update stok produk dari qty detail penjualan
+                    $penjualan_detail = $this->db->get_where('penjualan_detail', ['id_penjualan' => $id_penjualan])->result();
+                    foreach ($penjualan_detail as $pd) {
+                        $produk = $this->db->get_where('produk', ['id' => $pd->id_produk])->row_array();
+
+                        $this->db->where('id', $pd->id_produk);
+                        $this->db->update('produk', ['stok' => $produk['stok'] + $pd->qty]);
+                    }
+                    break;
+                default:
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Belum dibayar']);
+            }
+        } else if ($penjualan['status'] == 'Retur') {
+            $this->db->where('id', $id_penjualan);
+            $this->db->update('penjualan', ['status' => $status]);
+
+            switch ($status) {
+                case 'Batal':
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Batal']);
+
+                    // update stok produk dari qty detail penjualan
+                    $penjualan_detail = $this->db->get_where('penjualan_detail', ['id_penjualan' => $id_penjualan])->result();
+                    foreach ($penjualan_detail as $pd) {
+                        $produk = $this->db->get_where('produk', ['id' => $pd->id_produk])->row_array();
+
+                        $this->db->where('id', $pd->id_produk);
+                        $this->db->update('produk', ['stok' => $produk['stok'] - $pd->qty]);
+                    }
+                    break;
+                case 'Retur':
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Retur']);
+                    break;
+                default:
+                    $this->db->where('id_penjualan', $id_penjualan);
+                    $this->db->update('penjualan_detail', ['status_tagihan' => 'Belum dibayar']);
+
+                    // update stok produk dari qty detail penjualan
+                    $penjualan_detail = $this->db->get_where('penjualan_detail', ['id_penjualan' => $id_penjualan])->result();
+                    foreach ($penjualan_detail as $pd) {
+                        $produk = $this->db->get_where('produk', ['id' => $pd->id_produk])->row_array();
+
+                        $this->db->where('id', $pd->id_produk);
+                        $this->db->update('produk', ['stok' => $produk['stok'] - $pd->qty]);
+                    }
+            }
+        }
 
         $this->session->set_flashdata('pesan', '
         <div class="alert alert-info alert-dismissible" role="alert mb-3">

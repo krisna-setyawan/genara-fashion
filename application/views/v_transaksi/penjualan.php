@@ -313,8 +313,24 @@
 
 
     function status(id) {
-        $('#update_status_id_penjualan').val(id);
-        $('#modal-status').modal('toggle');
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>penjualan/cek_status_penjualan",
+            data: '&id_penjualan=' + id,
+            dataType: 'JSON',
+            success: function(data) {
+                if (data.status == 'no') {
+                    Swal.fire(
+                        'Maaf...',
+                        'Status tagihan sudah dibayar. Status penjualan tidak bisa dirubah !',
+                        'error'
+                    )
+                } else {
+                    $('#update_status_id_penjualan').val(id);
+                    $('#modal-status').modal('toggle');
+                }
+            }
+        })
     }
 
 
