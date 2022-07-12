@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 09:18 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.25
+-- Generation Time: Jul 12, 2022 at 04:28 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,68 +24,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
---
-
-CREATE TABLE `barang` (
-  `id` int(11) NOT NULL,
-  `kode_barang` varchar(30) NOT NULL,
-  `nama_barang` varchar(150) NOT NULL,
-  `id_suplier` int(11) NOT NULL,
-  `harga_beli` int(11) NOT NULL,
-  `harga_jual` int(11) NOT NULL,
-  `hg_reseller1` int(11) NOT NULL,
-  `hg_reseller2` int(11) NOT NULL,
-  `hg_reseller3` int(11) NOT NULL,
-  `hg_reseller4` int(11) NOT NULL,
-  `stok` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `barang`
---
-
-INSERT INTO `barang` (`id`, `kode_barang`, `nama_barang`, `id_suplier`, `harga_beli`, `harga_jual`, `hg_reseller1`, `hg_reseller2`, `hg_reseller3`, `hg_reseller4`, `stok`, `created_at`) VALUES
-(1, 'BR-01', 'Sabun', 0, 5000, 8000, 6000, 6500, 7000, 7500, 0, '2021-06-12 14:34:55'),
-(2, 'BR-01', 'Sapu', 0, 8500, 13000, 10000, 10000, 11000, 11500, 54, '2021-06-12 14:36:04'),
-(3, 'BR-03', 'Sandal Jepit', 0, 3000, 5500, 4000, 4000, 4000, 4500, 14, '2021-06-12 14:36:37'),
-(4, 'BR-04', 'Buku', 0, 6000, 9500, 7000, 8000, 8500, 8500, 9, '2021-06-12 14:37:18'),
-(5, 'BR-05', 'Bulpen', 0, 1000, 2500, 1500, 1500, 1500, 2000, 0, '2021-06-12 14:37:59'),
-(6, 'BR-06', 'Sepatu', 0, 50000, 75000, 65000, 67000, 69000, 70000, 0, '2021-06-18 16:37:02'),
-(7, 'BR-07', 'Baju', 0, 35000, 45000, 37000, 38000, 39000, 40000, 0, '2021-06-18 16:37:54'),
-(8, 'BR-08', 'Mie Sedap', 0, 1200, 2000, 1600, 1700, 1800, 1900, 40, '2021-06-20 06:27:14'),
-(9, 'BR-09', 'Taplak', 0, 5000, 8000, 5500, 6000, 6500, 7000, 10, '2021-06-20 06:30:29'),
-(10, 'BR-10', 'Baby Oil', 0, 7000, 9000, 8000, 8000, 8000, 8000, 13, '2021-06-20 06:31:57'),
-(11, 'BR-11', 'Permen Yupi', 0, 1000, 2000, 1500, 1500, 1500, 1500, 25, '2021-06-20 06:33:29'),
-(12, 'BR-12', 'Tolak Angin', 0, 12000, 16000, 14000, 14000, 14000, 14000, 33, '2021-06-20 06:34:59'),
-(13, 'BR-13', 'Buku Sidu', 0, 5000, 7000, 6000, 6000, 6000, 6000, 13, '2021-06-20 06:36:11'),
-(14, 'BR-14', 'Rinso', 0, 4500, 5000, 4750, 4750, 4750, 4750, 22, '2021-06-20 06:37:46'),
-(15, 'BR-15', 'Bedak ', 0, 15000, 25000, 20000, 20000, 20000, 20000, 5, '2021-06-20 06:38:39'),
-(16, 'BR-16', 'Minyak', 0, 11000, 15000, 14000, 14000, 14000, 14000, 20, '2021-06-20 06:39:51'),
-(17, 'BR-17', 'Gulaku', 0, 20000, 25000, 22000, 22000, 22000, 22000, 10, '2021-06-20 06:40:45'),
-(18, 'BR-18', 'Passeo', 0, 9000, 10000, 9500, 9500, 9500, 9500, 40, '2021-06-20 06:41:38'),
-(19, 'BR-19', 'Piring', 0, 5000, 7500, 6000, 6000, 6000, 6000, 12, '2021-06-20 06:42:33'),
-(20, 'BR-20', 'Gelas', 0, 2500, 4000, 3000, 3000, 3000, 3000, 12, '2021-06-20 06:43:24');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
   `id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL
+  `kategori` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id`, `nama`) VALUES
-(1, 'Jaket'),
-(2, 'Celana');
+INSERT INTO `kategori` (`id`, `kategori`) VALUES
+(1, 'Jaket Levis'),
+(2, 'Celana'),
+(4, 'Hoodie');
 
 -- --------------------------------------------------------
 
@@ -105,12 +59,8 @@ CREATE TABLE `no_pj_auto` (
 --
 
 INSERT INTO `no_pj_auto` (`id`, `id_penjualan`, `kode_transaksi`, `tanggal`) VALUES
-(3, 16, '290821002', '2021-08-29 05:58:41'),
-(6, 19, '290821003', '2021-08-29 07:15:55'),
-(7, 20, '290821004', '2021-08-29 07:32:21'),
-(8, 21, '290821005', '2021-08-29 13:14:18'),
-(11, 24, '200622001', '2022-06-20 03:44:07'),
-(12, 25, '200622002', '2022-06-20 04:02:28');
+(3, 3, '030722001', '2022-07-02 19:38:55'),
+(4, 4, '030722002', '2022-07-02 20:15:51');
 
 -- --------------------------------------------------------
 
@@ -121,10 +71,6 @@ INSERT INTO `no_pj_auto` (`id`, `id_penjualan`, `kode_transaksi`, `tanggal`) VAL
 CREATE TABLE `penjualan` (
   `id` int(11) NOT NULL,
   `no_penjualan` varchar(20) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL DEFAULT 0,
-  `id_reseller` int(11) NOT NULL DEFAULT 0,
-  `kelas_reseller` enum('Kelas 1','Kelas 2','Kelas 3','Kelas 4','0') NOT NULL DEFAULT '0',
-  `jenis_penjualan` enum('Umum','Pelanggan','Reseller') NOT NULL,
   `nama_pembeli` varchar(50) NOT NULL,
   `alamat_pembeli` varchar(60) NOT NULL,
   `no_telp_pembeli` varchar(20) NOT NULL,
@@ -132,9 +78,8 @@ CREATE TABLE `penjualan` (
   `grand_beli` int(11) NOT NULL DEFAULT 0,
   `grand_total` int(11) NOT NULL DEFAULT 0,
   `grand_laba` int(11) NOT NULL DEFAULT 0,
-  `jumlah_bayar` int(11) NOT NULL,
-  `jumlah_kembalian` int(11) NOT NULL,
-  `status` enum('Proses','Selesai') NOT NULL,
+  `jenis_penjualan` enum('Tokopedia','Shopee','Facebook','COD') NOT NULL,
+  `status` enum('Unsaved','Proses','Otw','Selesai','Retur','Batal') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -142,23 +87,13 @@ CREATE TABLE `penjualan` (
 -- Dumping data for table `penjualan`
 --
 
-INSERT INTO `penjualan` (`id`, `no_penjualan`, `id_pelanggan`, `id_reseller`, `kelas_reseller`, `jenis_penjualan`, `nama_pembeli`, `alamat_pembeli`, `no_telp_pembeli`, `tanggal`, `grand_beli`, `grand_total`, `grand_laba`, `jumlah_bayar`, `jumlah_kembalian`, `status`, `created_at`) VALUES
-(16, '290821002', 0, 4, 'Kelas 2', 'Reseller', 'Nindi', 'Mojorejo', '5555555', '2021-08-29', 25000, 30000, 5000, 50000, 20000, 'Selesai', '2021-08-29 14:09:28'),
-(19, '290821003', 0, 0, '0', 'Umum', 'coba beli lagi', 'alamadaasd asd', '084545154514', '2021-08-29', 30000, 50000, 20000, 100000, 50000, 'Selesai', '2021-08-29 07:29:59'),
-(20, '290821004', 0, 3, 'Kelas 1', 'Reseller', 'Reseller1', 'Alamat Reseller', '084561325', '2021-08-29', 6000, 8000, 2000, 10000, 2000, 'Selesai', '2021-08-29 07:33:09'),
-(21, '290821005', 0, 1, 'Kelas 4', 'Reseller', 'Pendikss', 'Samben', '0845465445', '2021-08-29', 13000, 16500, 3500, 17000, 500, 'Selesai', '2021-08-29 14:11:11'),
-(24, '200622001', 1, 0, '0', 'Umum', 'kristin', 'brongkos', '08192849821', '2022-06-20', 59000, 93000, 34000, 100000, 7000, 'Selesai', '2022-06-20 03:45:57'),
-(25, '200622002', 0, 0, '0', 'Umum', 'genta', 'brongkos', '081929371024', '2022-06-20', 0, 0, 0, 0, 0, 'Proses', '2022-06-20 04:02:28');
+INSERT INTO `penjualan` (`id`, `no_penjualan`, `nama_pembeli`, `alamat_pembeli`, `no_telp_pembeli`, `tanggal`, `grand_beli`, `grand_total`, `grand_laba`, `jenis_penjualan`, `status`, `created_at`) VALUES
+(3, '030722001', 'bayu', 'resapombo', '08731238123', '2022-07-03', 100000, 175000, 75000, 'Shopee', 'Selesai', '2022-07-02 20:15:26'),
+(4, '030722002', 'Mama', 'wates', '081238128312', '2022-07-03', 380000, 525000, 145000, 'Shopee', 'Selesai', '2022-07-04 13:18:50');
 
 --
 -- Triggers `penjualan`
 --
-DELIMITER $$
-CREATE TRIGGER `delete_detail_jual` AFTER DELETE ON `penjualan` FOR EACH ROW BEGIN
-DELETE FROM penjualan_detail WHERE id_penjualan = old.id;
-END
-$$
-DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `delete_no_pj_auto` AFTER DELETE ON `penjualan` FOR EACH ROW BEGIN
 DELETE FROM no_pj_auto WHERE id_penjualan = old.id;
@@ -175,16 +110,20 @@ DELIMITER ;
 CREATE TABLE `penjualan_detail` (
   `id` int(11) NOT NULL,
   `id_penjualan` int(11) NOT NULL,
-  `id_barang` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `id_suplier` int(11) NOT NULL,
   `no_penjualan` varchar(20) NOT NULL,
-  `kode_barang` varchar(20) NOT NULL,
-  `nama_barang` varchar(80) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `kode_produk` varchar(20) NOT NULL,
+  `nama_produk` varchar(80) NOT NULL,
+  `qty` int(11) NOT NULL,
   `hg_beli` int(11) NOT NULL,
   `hg_total_beli` int(11) NOT NULL,
-  `hg_satuan` int(11) NOT NULL,
-  `hg_total` int(11) NOT NULL,
+  `hg_produk` int(11) NOT NULL,
+  `hg_sablon` int(11) NOT NULL,
+  `hg_jual` int(11) NOT NULL,
+  `hg_total_jual` int(11) NOT NULL,
   `laba_total` int(11) NOT NULL,
+  `status_tagihan` enum('Belum dibayar','Lunas','Batal','Retur') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -192,30 +131,41 @@ CREATE TABLE `penjualan_detail` (
 -- Dumping data for table `penjualan_detail`
 --
 
-INSERT INTO `penjualan_detail` (`id`, `id_penjualan`, `id_barang`, `no_penjualan`, `kode_barang`, `nama_barang`, `jumlah`, `hg_beli`, `hg_total_beli`, `hg_satuan`, `hg_total`, `laba_total`, `created_at`) VALUES
-(39, 16, 13, '290821002', 'BR-13', 'Buku Sidu', 5, 5000, 25000, 6000, 30000, 5000, '2021-08-29 06:52:17'),
-(42, 19, 15, '290821003', 'BR-15', 'Bedak ', 2, 15000, 30000, 25000, 50000, 20000, '2021-08-29 07:25:42'),
-(43, 20, 8, '290821004', 'BR-08', 'Mie Sedap', 5, 1200, 6000, 1600, 8000, 2000, '2021-08-29 07:32:47'),
-(44, 21, 13, '290821005', 'BR-13', 'Buku Sidu', 2, 5000, 10000, 6000, 12000, 2000, '2021-08-29 13:14:57'),
-(45, 21, 3, '290821005', 'BR-03', 'Sandal Jepit', 1, 3000, 3000, 4500, 4500, 1500, '2021-08-29 13:15:11'),
-(50, 24, 15, '200622001', 'BR-15', 'Bedak ', 3, 15000, 45000, 25000, 75000, 30000, '2022-06-20 03:45:13'),
-(51, 24, 10, '200622001', 'BR-10', 'Baby Oil', 2, 7000, 14000, 9000, 18000, 4000, '2022-06-20 03:45:42');
+INSERT INTO `penjualan_detail` (`id`, `id_penjualan`, `id_produk`, `id_suplier`, `no_penjualan`, `kode_produk`, `nama_produk`, `qty`, `hg_beli`, `hg_total_beli`, `hg_produk`, `hg_sablon`, `hg_jual`, `hg_total_jual`, `laba_total`, `status_tagihan`, `created_at`) VALUES
+(11, 3, 1, 6, '030722001', 'PD01', 'Jaket 01', 1, 100000, 100000, 150000, 25000, 175000, 175000, 75000, 'Lunas', '2022-07-04 12:52:54'),
+(12, 4, 1, 6, '030722002', 'PD01', 'Jaket 01', 1, 100000, 100000, 150000, 25000, 175000, 175000, 75000, 'Belum dibayar', '2022-07-04 13:18:50'),
+(13, 4, 4, 7, '030722002', 'PD03', 'Hoodie Batman', 2, 140000, 280000, 150000, 25000, 175000, 350000, 70000, 'Belum dibayar', '2022-07-04 13:18:50');
+
+-- --------------------------------------------------------
 
 --
--- Triggers `penjualan_detail`
+-- Table structure for table `produk`
 --
-DELIMITER $$
-CREATE TRIGGER `add_barang_jual` AFTER INSERT ON `penjualan_detail` FOR EACH ROW BEGIN
-UPDATE barang SET stok = stok - NEW.jumlah WHERE id = NEW.id_barang;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `delete_barang_jual` AFTER DELETE ON `penjualan_detail` FOR EACH ROW BEGIN
-UPDATE barang SET stok = stok + OLD.jumlah WHERE id = OLD.id_barang;
-END
-$$
-DELIMITER ;
+
+CREATE TABLE `produk` (
+  `id` int(11) NOT NULL,
+  `kode_produk` varchar(30) NOT NULL,
+  `nama_produk` varchar(150) NOT NULL,
+  `id_suplier` int(11) NOT NULL,
+  `harga_produk` int(11) NOT NULL,
+  `harga_sablon` int(11) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
+  `id_warna` int(11) NOT NULL,
+  `motif` varchar(50) NOT NULL,
+  `ukuran` enum('S','M','L','XL','2XL','3XL','4XL','5XL','6XL','7XL') NOT NULL,
+  `stok` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id`, `kode_produk`, `nama_produk`, `id_suplier`, `harga_produk`, `harga_sablon`, `harga_beli`, `id_kategori`, `id_warna`, `motif`, `ukuran`, `stok`, `created_at`) VALUES
+(1, 'PD01', 'Jaket 01', 6, 150000, 25000, 100000, 1, 2, 'Polos', 'L', 0, '2022-07-02 06:33:34'),
+(3, 'PD02', 'Celana Jean', 6, 90000, 0, 70000, 2, 2, '-', 'S', 0, '2022-07-02 17:16:31'),
+(4, 'PD03', 'Hoodie Batman', 7, 150000, 25000, 140000, 4, 1, 'Batman', 'M', 0, '2022-07-02 17:17:09');
 
 -- --------------------------------------------------------
 
@@ -237,7 +187,7 @@ CREATE TABLE `profil_toko` (
 --
 
 INSERT INTO `profil_toko` (`id`, `nama`, `keterangan`, `telepon`, `alamat`, `logo`) VALUES
-(1, 'Muflih Id Blitar', 'Reseller Resmi Beauty Glow & Apapun', '08512312312', 'Pagergunung, Kesamben, Blitar', '30ca40e888ab8ba2520061d1c11facf7.png');
+(1, 'Genara Fashion', 'Fashion Gaul ya Genara Fashion', '08512312312', 'Brongkos, Kesamben, Blitar', '82d8cfb9cba0245b19040bb9489644fd.jpg');
 
 -- --------------------------------------------------------
 
@@ -261,7 +211,7 @@ INSERT INTO `suplier` (`id`, `nama`, `alamat`, `no_telp`, `created_at`) VALUES
 (1, 'Suplier BG', 'Malang', '085777555444', '2021-06-08 09:22:29'),
 (2, 'Suplier msglowss', 'Jakarta Selatan', '111111111111', '2021-06-08 09:39:07'),
 (5, 'Royal ATK', 'Malang', '084564564', '2021-06-12 14:39:03'),
-(6, 'Toko Bangunan', 'Kesamben', '08456565', '2021-06-12 14:39:36'),
+(6, 'Toko Baju', 'Kesamben', '08456565', '2021-06-12 14:39:36'),
 (7, 'Maju Jaya ', 'Blitar', 'xxx', '2021-06-20 07:42:59'),
 (8, 'Sejahtera Sentosa', 'Malang', '222', '2021-06-20 07:43:21'),
 (9, 'Jaya Abadi', 'Malang', '77777', '2021-06-20 07:43:48'),
@@ -323,7 +273,8 @@ INSERT INTO `user_access_menu` (`id`, `id_user`, `id_menu`) VALUES
 (18, 1, 10),
 (19, 1, 11),
 (20, 8, 1),
-(27, 2, 10);
+(27, 2, 10),
+(30, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -344,13 +295,13 @@ CREATE TABLE `user_menu` (
 
 INSERT INTO `user_menu` (`id`, `judul`, `url`, `icon`) VALUES
 (1, 'Dashboard', 'dashboard', 'home'),
-(3, 'Lihat Barang', 'lihatbarang', 'shopping-bag'),
-(4, 'Master Barang', 'masterbarang', 'package'),
-(5, 'Suplier', 'suplier', 'download'),
-(6, 'Kategori', 'kategori', 'users'),
-(7, 'Reseller', 'reseller', 'user-check'),
-(8, 'Pembelian', 'pembelian', 'arrow-down-circle'),
-(9, 'Penjualan', 'penjualan', 'arrow-up-circle'),
+(3, 'Lihat Produk', 'lihatproduk', 'shopping-bag'),
+(4, 'Master Produk', 'masterproduk', 'package'),
+(5, 'Master Kategori', 'kategori', 'folder-minus'),
+(6, 'Master Warna', 'warna', 'circle'),
+(7, 'Master Suplier', 'suplier', 'users'),
+(8, 'Penjualan', 'penjualan', 'arrow-up-circle'),
+(9, 'Tagihan Penjualan', 'tagihan', 'credit-card'),
 (10, 'Laporan', 'laporan', 'activity'),
 (11, 'Pengaturan', 'pengaturan', 'sliders');
 
@@ -373,15 +324,28 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Admin'),
 (2, 'User');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warna`
+--
+
+CREATE TABLE `warna` (
+  `id` int(11) NOT NULL,
+  `warna` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `warna`
+--
+
+INSERT INTO `warna` (`id`, `warna`) VALUES
+(1, 'Merah'),
+(2, 'Hitam');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `barang`
---
-ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `kategori`
@@ -405,6 +369,12 @@ ALTER TABLE `penjualan`
 -- Indexes for table `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -444,38 +414,44 @@ ALTER TABLE `user_role`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `warna`
 --
+ALTER TABLE `warna`
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `no_pj_auto`
 --
 ALTER TABLE `no_pj_auto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `profil_toko`
@@ -499,19 +475,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `warna`
+--
+ALTER TABLE `warna`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
