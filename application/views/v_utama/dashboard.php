@@ -1,7 +1,7 @@
 <main class="content" style="padding: 10px;">
 	<!-- <div class="container" style="padding: 0px;"> -->
 
-	<h1 class="h3 mb-3">Dashboard</h1>
+	<h1 class="h3 mb-2 ml-3">Dashboard</h1>
 
 
 	<div class="row">
