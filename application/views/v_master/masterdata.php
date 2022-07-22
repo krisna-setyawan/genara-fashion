@@ -11,7 +11,7 @@
 					<div class="row mb-3">
 						<?php foreach ($menu_master as $mn) : ?>
 							<div class="col-lg-6 col-xl-3 mb-4">
-								<a href="<?= base_url() ?>/<?= $mn['url'] ?>" style="text-decoration: none ;">
+								<a href="<?= base_url() ?><?= $mn['url'] ?>" style="text-decoration: none ;">
 									<div class="card-ku">
 										<div class="judul-card" style="background-color: #C0392B;"></div>
 										<div class="container-ku">

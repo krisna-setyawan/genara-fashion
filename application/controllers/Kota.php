@@ -25,12 +25,8 @@ class Kota extends CI_Controller
 			$row[] = $kot->provinsi;
 			// add html for action
 			$row[] = '<div class="dropdown">
-                        <a class="btn badge badge-warning text-dark" onclick="edit(' . $kot->id_kota . ')">
-                            Edit
-                        </a>
-                        <a class="btn badge badge-danger text-white" onclick="hapus(' . $kot->id_kota . ')">
-                            Hapus
-                        </a>
+						<button onclick="edit(' . $kot->id_kota . ')" class="badge btn-info">Edit</button>
+						<button onclick="hapus(' . $kot->id_kota . ')" class="badge btn-danger">Hapus</button>
                     </div>
                     ';
 			$data[] = $row;
@@ -47,11 +43,17 @@ class Kota extends CI_Controller
 
 	public function index()
 	{
+		$data_session_username = $this->session->userdata('username');
+		$data['user_login'] = $this->db->get_where('user', ['username' => $data_session_username])->row_array();
+
+		$data['profil_toko'] = $this->db->get_where('profil_toko', ['id' => 1])->row_array();
+
+		$this->db->order_by('nama_provinsi', 'asc');
 		$data['provinsi'] = $this->db->get('provinsi')->result();
 
 		$this->load->view('templates/header');
-		$this->load->view('templates/topbar');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('templates/topbar', $data);
 		$this->load->view('v_master/kota', $data);
 		$this->load->view('templates/footer');
 	}
@@ -89,10 +91,10 @@ class Kota extends CI_Controller
 
 	public function edit_kota_aksi()
 	{
-		$id =  $this->input->post('id_kota');
+		$id =  $this->input->post('edit_id');
 		$data = array(
-			'nama_kota' => $this->input->post('nama_kota'),
-			'id_provinsi' => $this->input->post('id_provinsi'),
+			'nama_kota' => $this->input->post('edit_nama_kota'),
+			'id_provinsi' => $this->input->post('edit_id_provinsi'),
 		);
 		$this->db->where('id_kota', $id);
 		$this->db->update('kota', $data);
@@ -112,19 +114,19 @@ class Kota extends CI_Controller
 
 	public function hapus_kota($id)
 	{
-		$where = array('id_provinsi' => $id);
+		$where = array('id_kota' => $id);
 		$this->db->where($where);
-		$this->db->delete('provinsi');
+		$this->db->delete('kota');
 		$this->session->set_flashdata('pesan', '
         <div class="alert alert-danger alert-dismissible" role="alert mb-3">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="alert-message">
-                <strong>Berhasil!</strong> Menghapus data provinsi.
+                <strong>Berhasil!</strong> Menghapus data kota.
             </div>
         </div>
         ');
-		redirect('provinsi');
+		redirect('kota');
 	}
 }

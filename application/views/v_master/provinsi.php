@@ -28,12 +28,8 @@
 										<td><?= $no++ ?></td>
 										<td><?= $pr->nama_provinsi ?></td>
 										<td class="text-center">
-											<a>
-												<button onclick="edit(<?= $pr->id_provinsi ?>)" class="badge btn-info">Edit</button>
-											</a>
-											<a>
-												<button onclick="hapus(<?= $pr->id_provinsi ?>)" class="badge btn-danger">Hapus</button>
-											</a>
+											<button onclick="edit(<?= $pr->id_provinsi ?>)" class="badge btn-info">Edit</button>
+											<button onclick="hapus(<?= $pr->id_provinsi ?>)" class="badge btn-danger">Hapus</button>
 										</td>
 									</tr>
 								<?php endforeach; ?>
